@@ -1,16 +1,18 @@
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 
-// Chemin vers le fichier de base de données
+// Chemin vers le fichier de base de donnï¿½es
 const dbPath = path.resolve(__dirname, "database", "gestion_projecteurs.db");
 
-// Connexion à SQLite
+// Connexion ï¿½ SQLite
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.error(" Erreur de connexion à SQLite :", err.message);
+        console.error(" Erreur de connexion ï¿½ SQLite :", err.message);
     } else {
-        console.log("Connexion à SQLite réussie !");
+        console.log("Connexion ï¿½ SQLite rï¿½ussie !");
     }
 });
-
+module.exports = {
+    secretKey: 'votre_clÃ©_secrÃ¨te_jwt', // Remplacez par une clÃ© secrÃ¨te robuste
+};
 module.exports = db;
