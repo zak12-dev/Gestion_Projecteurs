@@ -22,5 +22,5 @@ app.use("/reservations", reservationRoutes); // Routes pour la gestion des rése
 
 // Démarrer le serveur
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
+  console.log(`Serveur a bien démarré sur http://localhost:${PORT}`);
 });
