@@ -1,9 +1,10 @@
-const express = require('express');
+import express from "express";
+import authenticate from "../middleware/authMiddleware.js"; // Middleware d'authentification
+import userController from "../controllers/userController.js"; // Contrôleur pour les utilisateurs
+
 const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
 
-router.get('/profile', authMiddleware, (req, res) => {
-    res.json({ user: req.user });
-});
+// Route protégée pour obtenir le profil de l'utilisateur (GET /profile)
+router.get("/profile", authenticate, userController.getProfile);
 
-module.exports = router;
+export default router;

@@ -19,7 +19,7 @@ app.use(express.json());
 app.use("/auth", authRoutes); // Routes d'authentification
 app.use("/projectors", projectorRoutes); // Routes pour la gestion des projecteurs
 app.use("/reservations", reservationRoutes); // Routes pour la gestion des réservations
-
+db.
 // Démarrer le serveur
 app.listen(PORT, () => {
   console.log(`Serveur a bien démarré sur http://localhost:${PORT}`);

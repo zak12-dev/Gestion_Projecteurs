@@ -1,11 +1,17 @@
 import reservationModel from "../models/reservationModel.js"; // Modèle pour interagir avec la table des réservations
-
+import projectorModel from "../models/projectorModel.js";    //Pour interagir avec les tables de projecteurs
 // Réserver un projecteur
 const createReservation = async (req, res) => {
   const { user_id, projector_id, start_time, end_time } = req.body;
 
   try {
-    // Créer la réservation en base de données
+    // Vérifier si le projecteur est disponible
+    const projector = await projectorModel.findProjectorById(projector_id);
+    if (!projector || !projector.available) {
+      return res.status(400).json({ error: "Projecteur non disponible." });
+    }
+
+    // Créer la réservation
     const reservationId = await reservationModel.createReservation(
       user_id,
       projector_id,
@@ -13,16 +19,13 @@ const createReservation = async (req, res) => {
       end_time
     );
 
-    // Retourner une réponse de succès avec l'ID de la réservation créée
-    res
-      .status(201)
-      .json({ message: "Réservation créée avec succès", reservationId });
+    // Retourner une réponse de succès
+    res.status(201).json({ message: "Réservation créée avec succès", reservationId });
   } catch (err) {
     // En cas d'erreur, retourner un message d'erreur
     res.status(400).json({ error: err.message });
   }
 };
-
 // Lister toutes les réservations
 const getAllReservations = async (req, res) => {
   try {
